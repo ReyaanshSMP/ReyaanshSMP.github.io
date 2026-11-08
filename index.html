@@ -35,9 +35,9 @@
       --text-main: #f1eff7;
       --text-muted: #aaa8b5;
       --border-color: rgba(255,255,255,.09);
-      --accent: #b9c5ff;
-      --accent-container: #29365c;
-      --accent-text: #17213e;
+      --accent: #64b5f6;
+      --accent-container: #174a75;
+      --accent-text: #071b2e;
       --success: #8bd5a7;
       --danger: #ffb4ab;
       --radius-large: 28px;
@@ -1884,64 +1884,23 @@
   const GITHUB_ORG_URL = "https://github.com/ReyaanshSMP";
 
   /* =========================================
-     RANDOM MATERIAL YOU ACCENT
-     A new accent is selected every fresh load.
-     ========================================= */
+   FIXED MATERIAL YOU BLUE ACCENT
+   ========================================= */
 
-  const ACCENT_PALETTES = [
-    {
-      primary: "#b9c5ff",
-      container: "#29365c",
-      onContainer: "#e0e4ff"
-    },
-    {
-      primary: "#d0bcff",
-      container: "#49356f",
-      onContainer: "#eadbff"
-    },
-    {
-      primary: "#a8d8ff",
-      container: "#174568",
-      onContainer: "#d1e8ff"
-    },
-    {
-      primary: "#a8d5c0",
-      container: "#244b3b",
-      onContainer: "#c5f0dc"
-    },
-    {
-      primary: "#e9c18c",
-      container: "#57432b",
-      onContainer: "#ffddb0"
-    },
-    {
-      primary: "#f0b6c8",
-      container: "#623849",
-      onContainer: "#ffd9e4"
-    },
-    {
-      primary: "#c6c5a0",
-      container: "#45452e",
-      onContainer: "#e3e2bd"
-    }
-  ];
+   function applyBlueAccent() {
+      const root = document.documentElement;
 
-  function applyRandomAccent() {
-    const palette =
-      ACCENT_PALETTES[Math.floor(Math.random() * ACCENT_PALETTES.length)];
+      root.style.setProperty("--accent", "#64b5f6");
+      root.style.setProperty("--accent-container", "#174a75");
+      root.style.setProperty("--accent-text", "#071b2e");
 
-    const root = document.documentElement;
-
-    root.style.setProperty("--accent", palette.primary);
-    root.style.setProperty("--accent-container", palette.container);
-    root.style.setProperty("--accent-text", "#17171d");
-
-    root.style.setProperty("--md-sys-color-primary", palette.primary);
-    root.style.setProperty("--md-sys-color-primary-container", palette.container);
-    root.style.setProperty("--md-sys-color-on-primary-container", palette.onContainer);
+      root.style.setProperty("--md-sys-color-primary", "#64b5f6");
+      root.style.setProperty("--md-sys-color-on-primary", "#071b2e");
+      root.style.setProperty("--md-sys-color-primary-container", "#174a75");
+      root.style.setProperty("--md-sys-color-on-primary-container", "#d1e8ff"); 
   }
 
-  applyRandomAccent();
+  applyBlueAccent();
 
   /* =========================================
      PAGE NAVIGATION
