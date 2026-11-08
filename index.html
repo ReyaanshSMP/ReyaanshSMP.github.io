@@ -1,649 +1,2338 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ReyaanshSMP | Ultimate Minecraft Experience</title>
-    
-    <!-- Google Fonts: Outfit for Headings, Roboto for Body -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    
-    <style>
-        /* =========================================
-           1. MATERIAL YOU DESIGN TOKENS
-           ========================================= */
-        :root {
-            /* Border Radii */
-            --radii-sm: 16px;
-            --radii-md: 24px;
-            --radii-lg: 32px;
-            --radii-pill: 999px;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#17171d">
+  <title>ReyaanshSMP — Minecraft Server</title>
 
-            /* Animations */
-            --transition-smooth: all 0.4s cubic-bezier(0.2, 0, 0, 1);
-            --transition-fast: all 0.2s cubic-bezier(0.2, 0, 0, 1);
-        }
+  <!-- Material You CSS: actual library -->
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/hiratazx/material-you-css@latest/material-you.css">
 
-        /* --- LIGHT THEME BASE --- */
-        [data-theme="light"] {
-            --bg-color: #FDF8FD;
-            --surface: #FFFFFF;
-            --surface-variant: #F4EDF4;
-            --text-main: #1C1B1F;
-            --text-muted: #49454F;
-            --border: rgba(0, 0, 0, 0.08);
-            --shadow: rgba(0, 0, 0, 0.06);
-            --glass-bg: rgba(255, 255, 255, 0.8);
-        }
+  <!-- Material Symbols -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0,0">
 
-        /* --- DARK THEME BASE --- */
-        [data-theme="dark"] {
-            --bg-color: #141218;
-            --surface: #1D1B20;
-            --surface-variant: #2B2930;
-            --text-main: #E6E0E9;
-            --text-muted: #CAC4D0;
-            --border: rgba(255, 255, 255, 0.08);
-            --shadow: rgba(0, 0, 0, 0.4);
-            --glass-bg: rgba(29, 27, 32, 0.8);
-        }
+  <!-- Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
 
-        /* =========================================
-           2. GLOBAL STYLES
-           ========================================= */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <style>
+    /* =========================================
+       CONFIGURATION
+       ========================================= */
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: 'Roboto', sans-serif;
-            transition: var(--transition-smooth);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-        }
+    :root {
+      color-scheme: dark;
+      --page-bg: #111116;
+      --sidebar-bg: #17171d;
+      --surface-1: #1d1d25;
+      --surface-2: #25252e;
+      --surface-3: #30303a;
+      --text-main: #f1eff7;
+      --text-muted: #aaa8b5;
+      --border-color: rgba(255,255,255,.09);
+      --accent: #b9c5ff;
+      --accent-container: #29365c;
+      --accent-text: #17213e;
+      --success: #8bd5a7;
+      --danger: #ffb4ab;
+      --radius-large: 28px;
+      --radius-medium: 20px;
+      --radius-small: 14px;
 
-        h1, h2, h3, .logo {
-            font-family: 'Outfit', sans-serif;
-        }
+      /* Material You token overrides */
+      --md-sys-color-primary: var(--accent);
+      --md-sys-color-on-primary: var(--accent-text);
+      --md-sys-color-primary-container: var(--accent-container);
+      --md-sys-color-on-primary-container: var(--accent);
+      --md-sys-color-surface: var(--surface-1);
+      --md-sys-color-on-surface: var(--text-main);
+      --md-sys-color-surface-variant: var(--surface-2);
+      --md-sys-color-on-surface-variant: var(--text-muted);
+      --md-sys-color-background: var(--page-bg);
+      --md-sys-color-on-background: var(--text-main);
+    }
 
-        /* =========================================
-           3. HEADER & DARK MODE BUTTON
-           ========================================= */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 5%;
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border);
-            transition: var(--transition-smooth);
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        .logo {
-            font-size: 26px;
-            font-weight: 800;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: var(--transition-smooth);
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        /* THE DARK MODE BUTTON */
-        .theme-toggle-btn {
-            background: var(--surface-variant);
-            color: var(--text-main);
-            border: 1px solid var(--border);
-            border-radius: var(--radii-pill);
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: var(--transition-fast);
-            box-shadow: 0 4px 12px var(--shadow);
-        }
+    body.md-dark {
+      margin: 0;
+      background: var(--page-bg);
+      color: var(--text-main);
+      font-family: Roboto, sans-serif;
+      min-height: 100vh;
+    }
 
-        .theme-toggle-btn:hover {
-            transform: scale(1.05);
-            background: var(--primary-container);
-            color: var(--on-primary-container);
-            border-color: var(--primary);
-        }
+    button, input {
+      font: inherit;
+    }
 
-        /* =========================================
-           4. HERO SECTION
-           ========================================= */
-        .hero-container {
-            padding: 40px 5% 20px;
-            max-width: 1400px;
-            margin: 0 auto;
-            width: 100%;
-        }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        .hero-card {
-            background: linear-gradient(145deg, var(--primary-container), var(--surface-variant));
-            border-radius: var(--radii-lg);
-            padding: 80px 20px;
-            text-align: center;
-            box-shadow: 0 16px 40px var(--shadow);
-            position: relative;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            transition: var(--transition-smooth);
-        }
+    button {
+      color: inherit;
+    }
 
-        .status-badge {
-            background: var(--surface);
-            color: var(--text-main);
-            padding: 10px 20px;
-            border-radius: var(--radii-pill);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 500;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 12px var(--shadow);
-        }
+    .material-symbols-rounded {
+      font-family: "Material Symbols Rounded";
+      font-weight: normal;
+      font-style: normal;
+      font-size: 21px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      direction: ltr;
+      -webkit-font-feature-settings: "liga";
+      -webkit-font-smoothing: antialiased;
+    }
 
-        .dot {
-            width: 10px;
-            height: 10px;
-            background-color: #388e3c;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
+    /* =========================================
+       RANDOM MATERIAL YOU ACCENT
+       ========================================= */
 
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(56, 142, 60, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(56, 142, 60, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(56, 142, 60, 0); }
-        }
+    /* =========================================
+       APP LAYOUT
+       ========================================= */
 
-        .hero-card h1 {
-            font-size: clamp(36px, 6vw, 64px);
-            font-weight: 800;
-            color: var(--on-primary-container);
-            line-height: 1.1;
-            margin-bottom: 20px;
-        }
+    .app {
+      display: flex;
+      min-height: 100vh;
+    }
 
-        .hero-card p {
-            font-size: 18px;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto 40px;
-            line-height: 1.6;
-        }
+    .sidebar {
+      width: 264px;
+      height: 100vh;
+      position: fixed;
+      inset: 0 auto 0 0;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      padding: 22px 16px;
+      z-index: 50;
+      overflow-y: auto;
+    }
 
-        /* Buttons */
-        .btn-group {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 5px 9px 25px;
+    }
 
-        .btn {
-            padding: 0 32px;
-            height: 64px;
-            border-radius: var(--radii-pill);
-            font-size: 18px;
-            font-weight: 500;
-            font-family: 'Roboto', sans-serif;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            border: none;
-            transition: var(--transition-fast);
-        }
+    .brand img {
+      width: 47px;
+      height: 47px;
+      border-radius: 16px;
+      object-fit: cover;
+      background: var(--surface-3);
+    }
 
-        .btn-primary {
-            background: var(--primary);
-            color: var(--on-primary);
-            box-shadow: 0 8px 24px var(--shadow);
-        }
+    .brand-name {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -.4px;
+    }
 
-        .btn-primary:hover {
-            transform: translateY(-4px);
-            filter: brightness(1.15);
-            box-shadow: 0 12px 28px var(--shadow);
-        }
+    .brand-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
 
-        .btn-secondary {
-            background: var(--surface);
-            color: var(--text-main);
-            border: 2px solid var(--border);
-        }
+    .nav-label {
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      padding: 17px 13px 9px;
+      text-transform: uppercase;
+    }
 
-        .btn-secondary:hover {
-            background: var(--surface-variant);
-            transform: translateY(-4px);
-        }
+    .nav-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
 
-        /* =========================================
-           5. MAIN CONTENT (FEATURES & INFO)
-           ========================================= */
-        .content-wrapper {
-            max-width: 1200px;
-            margin: 40px auto 120px;
-            padding: 0 5%;
-            width: 100%;
-        }
+    .nav-item {
+      border: 0;
+      background: transparent;
+      min-height: 46px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 0 15px;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: left;
+      transition: .18s ease;
+      width: 100%;
+    }
 
-        .section-title {
-            font-size: 36px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 40px;
-            color: var(--text-main);
-        }
+    .nav-item:hover {
+      background: var(--surface-2);
+      color: var(--text-main);
+    }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-            margin-bottom: 60px;
-        }
+    .nav-item.active {
+      background: var(--accent-container);
+      color: var(--accent);
+      font-weight: 700;
+    }
 
-        .card {
-            background: var(--surface);
-            padding: 32px;
-            border-radius: var(--radii-md);
-            border: 1px solid var(--border);
-            box-shadow: 0 4px 12px var(--shadow);
-            transition: var(--transition-smooth);
-        }
+    .nav-item .material-symbols-rounded {
+      font-size: 21px;
+    }
 
-        .card:hover {
-            transform: translateY(-8px);
-            background: var(--surface-variant);
-            border-color: var(--primary);
-            box-shadow: 0 12px 32px var(--shadow);
-        }
+    .sidebar-bottom {
+      margin-top: auto;
+      padding: 15px 8px 3px;
+    }
 
-        .card-icon {
-            width: 56px;
-            height: 56px;
-            background: var(--primary-container);
-            color: var(--on-primary-container);
-            border-radius: var(--radii-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 24px;
-            transition: var(--transition-smooth);
-        }
+    .sidebar-server {
+      background: var(--surface-2);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 14px;
+    }
 
-        .card h3 {
-            font-size: 24px;
-            margin-bottom: 12px;
-        }
+    .sidebar-server-title {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 9px;
+    }
 
-        .card p {
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
+    .sidebar-server-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+    }
 
-        .join-box {
-            background: var(--surface-variant);
-            border-radius: var(--radii-sm);
-            padding: 16px;
-            margin-top: 20px;
-            font-family: monospace;
-            font-size: 16px;
-            color: var(--primary);
-            text-align: center;
-            border: 1px dashed var(--primary);
-        }
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #777;
+      flex-shrink: 0;
+    }
 
-        /* =========================================
-           6. FLOATING THEME DOCK (Bottom Center)
-           ========================================= */
-        .theme-dock {
-            position: fixed;
-            bottom: 32px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--surface);
-            padding: 12px 24px;
-            border-radius: var(--radii-pill);
-            box-shadow: 0 12px 40px var(--shadow);
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            z-index: 99;
-            backdrop-filter: blur(10px);
-        }
+    .status-dot.online {
+      background: var(--success);
+      box-shadow: 0 0 12px rgba(139,213,167,.45);
+    }
 
-        .dock-label {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+    .status-dot.offline {
+      background: var(--danger);
+    }
 
-        .color-row {
-            display: flex;
-            gap: 12px;
-        }
+    .main {
+      margin-left: 264px;
+      width: calc(100% - 264px);
+      min-width: 0;
+    }
 
-        .color-btn {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 3px solid transparent;
-            cursor: pointer;
-            transition: var(--transition-fast);
-        }
+    .topbar {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 38px;
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(17,17,22,.82);
+      backdrop-filter: blur(18px);
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
 
-        .color-btn:hover {
-            transform: scale(1.15);
-        }
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
 
-        .color-btn.active {
-            border-color: var(--text-main);
-            transform: scale(1.15);
-        }
+    .menu-button {
+      display: none;
+    }
 
-        /* =========================================
-           7. SNACKBAR & FOOTER
-           ========================================= */
-        .snackbar {
-            position: fixed;
-            bottom: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--primary);
-            color: var(--on-primary);
-            padding: 16px 32px;
-            border-radius: var(--radii-pill);
-            font-weight: 500;
-            font-size: 16px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-            transition: bottom 0.5s cubic-bezier(0.2, 0, 0, 1);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+    .breadcrumb {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
 
-        .snackbar.show { bottom: 120px; }
+    .breadcrumb strong {
+      color: var(--text-main);
+      font-weight: 700;
+    }
 
-        footer {
-            margin-top: auto;
-            text-align: center;
-            padding: 40px;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border);
-            background: var(--surface);
-        }
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-        svg { width: 24px; height: 24px; fill: currentColor; }
-        .card-icon svg { width: 32px; height: 32px; }
+    .top-icon {
+      border: 1px solid var(--border-color);
+      background: var(--surface-1);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+    }
 
-        @media (max-width: 768px) {
-            .btn-group { flex-direction: column; }
-            .btn { width: 100%; justify-content: center; }
-            .theme-toggle-btn span { display: none; } /* Hide text on mobile, keep icon */
-            .theme-dock { width: 90%; justify-content: center; padding: 12px; }
-            .dock-label { display: none; }
-        }
-    </style>
+    .top-icon:hover {
+      background: var(--surface-3);
+    }
+
+    .owner-mini {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: 7px;
+    }
+
+    .owner-mini img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+    }
+
+    .owner-mini-name {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .owner-mini-label {
+      color: var(--text-muted);
+      font-size: 11px;
+      margin-top: 3px;
+    }
+
+    .content {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 34px 38px 65px;
+    }
+
+    .page {
+      display: none;
+      animation: pageIn .22s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes pageIn {
+      from { opacity: 0; transform: translateY(7px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =========================================
+       SHARED COMPONENTS
+       ========================================= */
+
+    .page-heading {
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .page-heading h1 {
+      font-size: clamp(28px, 4vw, 39px);
+      letter-spacing: -1.2px;
+      margin: 0;
+      font-weight: 800;
+    }
+
+    .page-heading p {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 700px;
+      margin: 11px 0 0;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .md-card {
+      color: var(--text-main);
+      background: var(--surface-1);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-large);
+      overflow: hidden;
+      box-shadow: none;
+    }
+
+    .panel {
+      padding: 23px;
+    }
+
+    .panel-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0 0 7px;
+    }
+
+    .panel-description {
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .muted {
+      color: var(--text-muted);
+    }
+
+    .accent {
+      color: var(--accent);
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .md-btn {
+      border-radius: 30px;
+      font-weight: 700;
+      min-height: 44px;
+      cursor: pointer;
+      transition: .18s ease;
+    }
+
+    .md-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .md-btn .material-symbols-rounded {
+      margin-right: 7px;
+      vertical-align: middle;
+    }
+
+    .md-chip {
+      border-radius: 30px;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 11px;
+      border-radius: 30px;
+      background: var(--surface-2);
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .section-title {
+      font-size: 19px;
+      font-weight: 800;
+      margin: 30px 0 15px;
+      letter-spacing: -.3px;
+    }
+
+    .stat-card {
+      padding: 20px;
+      min-height: 132px;
+    }
+
+    .stat-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .stat-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: var(--accent-container);
+      color: var(--accent);
+    }
+
+    .stat-number {
+      font-size: 29px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-top: 13px;
+    }
+
+    .stat-caption {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    /* =========================================
+       HOME PAGE
+       ========================================= */
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(25px, 5vw, 55px);
+      border-radius: 34px;
+      border: 1px solid var(--border-color);
+      background:
+        radial-gradient(ellipse at 85% 15%, var(--accent-container), transparent 48%),
+        linear-gradient(135deg, #252530, #191920 70%);
+      min-height: 330px;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .hero-copy {
+      max-width: 680px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      padding: 8px 13px;
+      border-radius: 30px;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 6vw, 65px);
+      letter-spacing: -2.5px;
+      line-height: 1.02;
+      margin: 0;
+      font-weight: 800;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      max-width: 530px;
+      line-height: 1.7;
+      font-size: 15px;
+      margin: 17px 0 23px;
+    }
+
+    .hero-logo {
+      width: clamp(110px, 18vw, 190px);
+      height: clamp(110px, 18vw, 190px);
+      border-radius: 35px;
+      object-fit: cover;
+      margin-left: auto;
+      box-shadow: 0 25px 80px rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.15);
+    }
+
+    .server-address {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 18px 20px;
+      margin-top: 18px;
+    }
+
+    .address-label {
+      color: var(--text-muted);
+      font-size: 12px;
+      margin-bottom: 7px;
+    }
+
+    .address-value {
+      font-size: 17px;
+      font-weight: 700;
+      word-break: break-all;
+    }
+
+    .address-actions {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .feature-card {
+      padding: 22px;
+      min-height: 160px;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      background: var(--accent-container);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      margin-bottom: 17px;
+    }
+
+    .feature-card h3 {
+      margin: 0 0 7px;
+      font-size: 15px;
+    }
+
+    .feature-card p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    /* =========================================
+       STATUS PAGE
+       ========================================= */
+
+    .status-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+
+    .status-banner-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .status-large-dot {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: #777;
+      flex-shrink: 0;
+    }
+
+    .status-large-dot.online {
+      background: var(--success);
+      box-shadow: 0 0 18px rgba(139,213,167,.5);
+    }
+
+    .status-large-dot.offline {
+      background: var(--danger);
+    }
+
+    .status-heading {
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .status-subheading {
+      color: var(--text-muted);
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 13px;
+    }
+
+    .detail-row:last-child {
+      border-bottom: 0;
+    }
+
+    .detail-row span:first-child {
+      color: var(--text-muted);
+    }
+
+    .detail-row strong {
+      text-align: right;
+      word-break: break-word;
+    }
+
+    .motd-box {
+      padding: 16px;
+      background: var(--surface-2);
+      border-radius: 16px;
+      color: var(--text-muted);
+      white-space: pre-wrap;
+      line-height: 1.7;
+      font-size: 13px;
+      min-height: 55px;
+    }
+
+    .player-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 13px;
+    }
+
+    .player-pill {
+      background: var(--surface-2);
+      border-radius: 30px;
+      padding: 8px 12px;
+      font-size: 12px;
+    }
+
+    /* =========================================
+       JOIN PAGE
+       ========================================= */
+
+    .step {
+      display: flex;
+      gap: 15px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .step:last-child {
+      border: 0;
+    }
+
+    .step-number {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: var(--accent-container);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      font-weight: 800;
+    }
+
+    .step h3 {
+      font-size: 14px;
+      margin: 0 0 6px;
+    }
+
+    .step p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* =========================================
+       ABOUT / OWNER
+       ========================================= */
+
+    .about-logo {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 27px;
+      margin-bottom: 17px;
+    }
+
+    .owner-card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .owner-card img {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+    }
+
+    .owner-card h2 {
+      font-size: 20px;
+      margin: 0 0 5px;
+    }
+
+    .owner-card p {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin: 0 0 12px;
+    }
+
+    /* =========================================
+       FAQ / RULES
+       ========================================= */
+
+    .faq-item {
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: transparent;
+      border: 0;
+      color: var(--text-main);
+      padding: 19px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      text-align: left;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .faq-answer {
+      display: none;
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.7;
+      padding: 0 25px 18px 0;
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    .faq-item.open .faq-question .material-symbols-rounded {
+      transform: rotate(180deg);
+    }
+
+    .rule-item {
+      display: flex;
+      gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .rule-item:last-child {
+      border: 0;
+    }
+
+    .rule-item .material-symbols-rounded {
+      color: var(--accent);
+      margin-top: 2px;
+    }
+
+    .rule-item h3 {
+      font-size: 14px;
+      margin: 0 0 5px;
+    }
+
+    .rule-item p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* =========================================
+       COMMUNITY / FOOTER
+       ========================================= */
+
+    .community-link {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .community-link:last-child {
+      border: 0;
+    }
+
+    .community-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      background: var(--surface-2);
+      color: var(--accent);
+    }
+
+    .community-link h3 {
+      font-size: 14px;
+      margin: 0 0 4px;
+    }
+
+    .community-link p {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    .community-link .material-symbols-rounded:last-child {
+      margin-left: auto;
+      color: var(--text-muted);
+    }
+
+    .footer {
+      border-top: 1px solid var(--border-color);
+      padding: 25px 38px;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    .footer a {
+      color: var(--accent);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 25px;
+      left: 50%;
+      transform: translate(-50%, 20px);
+      background: #303039;
+      color: white;
+      border-radius: 30px;
+      padding: 13px 19px;
+      font-size: 13px;
+      opacity: 0;
+      pointer-events: none;
+      transition: .25s;
+      z-index: 100;
+      box-shadow: 0 8px 30px rgba(0,0,0,.35);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .loading {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .refreshing {
+      opacity: .65;
+      pointer-events: none;
+    }
+
+    /* =========================================
+       MOBILE
+       ========================================= */
+
+    .mobile-overlay {
+      display: none;
+    }
+
+    @media (max-width: 1050px) {
+      .grid-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .hero-logo {
+        width: 125px;
+        height: 125px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform .25s ease;
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .mobile-overlay.show {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.6);
+        z-index: 40;
+      }
+
+      .main {
+        margin-left: 0;
+        width: 100%;
+      }
+
+      .topbar {
+        padding: 0 17px;
+        height: 65px;
+      }
+
+      .menu-button {
+        display: grid;
+      }
+
+      .content {
+        padding: 23px 16px 45px;
+      }
+
+      .footer {
+        padding: 22px 17px;
+      }
+
+      .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 27px 22px;
+      }
+
+      .hero-logo {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 43px;
+      }
+
+      .owner-mini-name {
+        display: none;
+      }
+
+      .owner-mini-label {
+        display: none;
+      }
+
+      .server-address {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .address-actions {
+        width: 100%;
+      }
+
+      .address-actions button {
+        flex: 1;
+      }
+
+      .status-banner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .grid-4 {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stat-card {
+        padding: 15px;
+      }
+
+      .stat-number {
+        font-size: 23px;
+      }
+
+      .owner-card {
+        align-items: flex-start;
+      }
+    }
+  </style>
 </head>
-<body>
 
-    <!-- TOP HEADER -->
-    <header>
-        <div class="logo">
-            <!-- Diamond Icon -->
-            <svg viewBox="0 0 24 24"><path d="M12 2L2 12l10 10 10-10L12 2zm0 3.5l6.5 6.5-6.5 6.5-6.5-6.5L12 5.5z"/></svg>
-            ReyaanshSMP
+<body class="md-dark">
+
+<div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="#home">
+      <img src="https://github.com/ReyaanshSMP.png" alt="ReyaanshSMP logo">
+      <div>
+        <div class="brand-name">ReyaanshSMP</div>
+        <div class="brand-subtitle">Minecraft Server</div>
+      </div>
+    </a>
+
+    <div class="nav-label">Main menu</div>
+    <nav class="nav-list">
+      <button class="nav-item active" data-page="home">
+        <span class="material-symbols-rounded">home</span> Home
+      </button>
+      <button class="nav-item" data-page="about">
+        <span class="material-symbols-rounded">info</span> About
+      </button>
+      <button class="nav-item" data-page="join">
+        <span class="material-symbols-rounded">play_circle</span> How to Join
+      </button>
+      <button class="nav-item" data-page="status">
+        <span class="material-symbols-rounded">monitor_heart</span> Server Status
+      </button>
+    </nav>
+
+    <div class="nav-label">Information</div>
+    <nav class="nav-list">
+      <button class="nav-item" data-page="rules">
+        <span class="material-symbols-rounded">gavel</span> Rules
+      </button>
+      <button class="nav-item" data-page="faq">
+        <span class="material-symbols-rounded">quiz</span> FAQ
+      </button>
+      <button class="nav-item" data-page="community">
+        <span class="material-symbols-rounded">groups</span> Community
+      </button>
+      <button class="nav-item" data-page="owner">
+        <span class="material-symbols-rounded">person</span> Server Owner
+      </button>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="sidebar-server">
+        <div class="sidebar-server-title">LIVE SERVER STATUS</div>
+        <div class="sidebar-server-status">
+          <span class="status-dot" id="sidebarDot"></span>
+          <span id="sidebarStatus">Checking...</span>
         </div>
+        <div class="muted" style="font-size:11px;margin-top:7px" id="sidebarPlayers">
+          Checking player count...
+        </div>
+      </div>
+    </div>
+  </aside>
 
-        <!-- MASSIVE DARK MODE BUTTON -->
-        <button id="theme-toggle" class="theme-toggle-btn" onclick="toggleDarkMode()">
-            <svg id="mode-icon" viewBox="0 0 24 24">
-                <!-- Icon injected via JS -->
-            </svg>
-            <span id="mode-text">Dark Mode</span>
+  <!-- MAIN -->
+  <main class="main">
+
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="top-icon menu-button" onclick="toggleSidebar()" aria-label="Open menu">
+          <span class="material-symbols-rounded">menu</span>
         </button>
+        <div class="breadcrumb">
+          ReyaanshSMP <span class="muted">/</span>
+          <strong id="breadcrumbPage">Home</strong>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <button class="top-icon" onclick="refreshServer()" title="Refresh server status">
+          <span class="material-symbols-rounded">refresh</span>
+        </button>
+        <a class="owner-mini" href="https://github.com/reyaansh72" target="_blank" rel="noopener">
+          <img src="https://github.com/reyaansh72.png" alt="Reyaansh profile">
+          <div>
+            <div class="owner-mini-name">reyaansh72</div>
+            <div class="owner-mini-label">Server Owner</div>
+          </div>
+        </a>
+      </div>
     </header>
 
-            
-            
-            <div class="btn-group">
-                <button class="btn btn-primary" onclick="copyIP('java')">
-                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-                    Play on Java
-                </button>
-                <button class="btn btn-secondary" onclick="copyIP('bedrock')">
-                    <svg viewBox="0 0 24 24"><path d="M17 1H7c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm0 18H7V5h10v14z"/></svg>
-                    Play on Bedrock
-                </button>
-            </div>
-        </div>
-    </div>
+    <div class="content">
 
-    <!-- MAIN FEATURES -->
-    <div class="content-wrapper">
-        <h2 class="section-title">Why Choose ReyaanshSMP?</h2>
-        
-        <div class="grid">
-            <div class="card">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.65 0 1.12-1.08 1.95-2.7 1.95-1.91 0-2.85-.97-2.96-2.3H6.42c.12 2.36 1.73 3.65 3.58 4.09V21h3v-2.1c2.14-.46 3.6-1.74 3.6-3.8 0-2.43-1.92-3.53-4.8-4.2z"/></svg>
-                </div>
-                <h3>Player Economy</h3>
-                <p>Build your empire. Set up custom shops, trade resources, and become the richest player on the server.</p>
-            </div>
-            
-            <div class="card">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24"><path d="M7.5 5.6L5 7l1.4-2.5L5 2l2.5 1.4L10 2 8.6 4.5 10 7 7.5 5.6zm12 9.8L17 14l1.4 2.5L17 19l2.5-1.4L22 19l-1.4-2.5L22 14l-2.5 1.4zM22 2l-2.5 1.4L17 2l1.4 2.5L17 7l2.5-1.4L22 7l-1.4-2.5L22 2zm-7.6 5.4c-.4-.4-1-.4-1.4 0l-9.6 9.6c-.4.4-.4 1 0 1.4l5.6 5.6c.4.4 1 .4 1.4 0l9.6-9.6c.4-.4.4-1 0-1.4l-5.6-5.6zm-1.4 10l-4.2-4.2 7.1-7.1 4.2 4.2-7.1 7.1z"/></svg>
-                </div>
-                <h3>Custom Enchants</h3>
-                <p>Unlock completely unique enchantments that alter gameplay, farming, and intense PvP battles.</p>
+      <!-- ================= HOME ================= -->
+      <section class="page active" id="page-home">
+
+        <div class="hero">
+          <div class="hero-copy">
+            <div class="hero-badge">
+              <span class="status-dot" id="heroDot"></span>
+              <span id="heroStatus">Checking server...</span>
             </div>
 
-            <div class="card">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-                </div>
-                <h3>Grief-Free Zone</h3>
-                <p>We use advanced land-claiming and active moderation to ensure your hard work is never destroyed.</p>
+            <h1>Welcome to<br><span>ReyaanshSMP.</span></h1>
+            <p>
+              Your Minecraft multiplayer world. Explore, build,
+              play and make your own experience on the server.
+            </p>
+
+            <div class="btn-row">
+              <button class="md-btn md-btn-filled" onclick="copyIP()">
+                <span class="material-symbols-rounded">content_copy</span>
+                Copy server IP
+              </button>
+              <button class="md-btn md-btn-outlined" onclick="navigate('join')">
+                <span class="material-symbols-rounded">arrow_forward</span>
+                How to join
+              </button>
             </div>
+          </div>
+
+          <img class="hero-logo"
+            src="https://github.com/ReyaanshSMP.png"
+            alt="ReyaanshSMP server icon">
         </div>
 
-        <!-- Connection Info Cards -->
-        <h2 class="section-title" style="margin-top: 80px;">How to Connect</h2>
-        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));">
-            <div class="card">
-                <h3>Java Edition</h3>
-                <p>Open Minecraft Java, click Multiplayer, click Add Server, and paste this into the Server Address box:</p>
-                <div class="join-box" id="display-java-ip">Loading...</div>
-            </div>
-            <div class="card">
-                <h3>Bedrock Edition (Mobile/Console)</h3>
-                <p>Open Minecraft Bedrock, go to Play > Servers > Add Server, and use the following details:</p>
-                <div class="join-box" id="display-bedrock-ip">Loading...</div>
-            </div>
+        <div class="md-card server-address">
+          <div>
+            <div class="address-label">JAVA SERVER ADDRESS</div>
+            <div class="address-value" id="homeAddress">Loading...</div>
+          </div>
+          <div class="address-actions">
+            <button class="md-btn md-btn-tonal" onclick="copyIP()">
+              <span class="material-symbols-rounded">content_copy</span> Copy
+            </button>
+            <button class="md-btn md-btn-outlined" onclick="navigate('status')">
+              <span class="material-symbols-rounded">monitor_heart</span> Status
+            </button>
+          </div>
         </div>
-    </div>
 
-    <!-- FLOATING THEME DOCK -->
-    <div class="theme-dock">
-        <span class="dock-label">Theme Color</span>
-        <div class="color-row">
-            <div class="color-btn active" style="background-color: #6750a4;" onclick="setColor('purple', this)"></div>
-            <div class="color-btn" style="background-color: #0061a4;" onclick="setColor('blue', this)"></div>
-            <div class="color-btn" style="background-color: #1a6c30;" onclick="setColor('green', this)"></div>
-            <div class="color-btn" style="background-color: #b3261e;" onclick="setColor('red', this)"></div>
-            <div class="color-btn" style="background-color: #e65100;" onclick="setColor('orange', this)"></div>
+        <div class="section-title">Server overview</div>
+        <div class="grid grid-4">
+          <div class="md-card stat-card">
+            <div class="stat-top">
+              Players online
+              <span class="stat-icon material-symbols-rounded">group</span>
+            </div>
+            <div class="stat-number" id="homePlayers">—</div>
+            <div class="stat-caption" id="homeMaxPlayers">Waiting for API</div>
+          </div>
+
+          <div class="md-card stat-card">
+            <div class="stat-top">
+              Server version
+              <span class="stat-icon material-symbols-rounded">deployed_code</span>
+            </div>
+            <div class="stat-number" id="homeVersion" style="font-size:20px">—</div>
+            <div class="stat-caption">Reported by server API</div>
+          </div>
+
+          <div class="md-card stat-card">
+            <div class="stat-top">
+              Server status
+              <span class="stat-icon material-symbols-rounded">sensors</span>
+            </div>
+            <div class="stat-number" id="homeOnline" style="font-size:22px">—</div>
+            <div class="stat-caption">Live availability</div>
+          </div>
+
+          <div class="md-card stat-card">
+            <div class="stat-top">
+              Software
+              <span class="stat-icon material-symbols-rounded">terminal</span>
+            </div>
+            <div class="stat-number" id="homeSoftware" style="font-size:20px">—</div>
+            <div class="stat-caption">Server software</div>
+          </div>
         </div>
+
+        <div class="section-title">Explore ReyaanshSMP</div>
+        <div class="grid grid-3">
+          <div class="md-card feature-card" onclick="navigate('about')">
+            <div class="feature-icon">
+              <span class="material-symbols-rounded">info</span>
+            </div>
+            <h3>About the server</h3>
+            <p>Learn about ReyaanshSMP and what the server is about.</p>
+          </div>
+
+          <div class="md-card feature-card" onclick="navigate('join')">
+            <div class="feature-icon">
+              <span class="material-symbols-rounded">sports_esports</span>
+            </div>
+            <h3>Start playing</h3>
+            <p>Follow the instructions to connect to the server.</p>
+          </div>
+
+          <div class="md-card feature-card" onclick="navigate('status')">
+            <div class="feature-icon">
+              <span class="material-symbols-rounded">monitor_heart</span>
+            </div>
+            <h3>Live server status</h3>
+            <p>See availability, players, version and other server details.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= ABOUT ================= -->
+      <section class="page" id="page-about">
+        <div class="page-heading">
+          <div class="eyebrow">Discover</div>
+          <h1>About ReyaanshSMP</h1>
+          <p>Everything you need to know about the Minecraft server.</p>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="md-card panel">
+            <img class="about-logo"
+              src="https://github.com/ReyaanshSMP.png"
+              alt="Server logo">
+            <h2 class="panel-title" style="font-size:23px">ReyaanshSMP</h2>
+            <p class="panel-description">
+              ReyaanshSMP is a Minecraft SMP server created for
+              multiplayer gameplay, exploration and building.
+              Join the world and create your own experience.
+            </p>
+            <div class="chip-row" style="margin-top:18px">
+              <span class="tag">Minecraft</span>
+              <span class="tag">SMP</span>
+              <span class="tag">Multiplayer</span>
+            </div>
+          </div>
+
+          <div class="md-card panel">
+            <h2 class="panel-title">Server information</h2>
+            <p class="panel-description">Current configured connection details.</p>
+            <div style="margin-top:18px">
+              <div class="detail-row">
+                <span>Server name</span><strong>ReyaanshSMP</strong>
+              </div>
+              <div class="detail-row">
+                <span>Server address</span><strong id="aboutAddress">—</strong>
+              </div>
+              <div class="detail-row">
+                <span>Game edition</span><strong>Java</strong>
+              </div>
+              <div class="detail-row">
+                <span>Server version</span><strong id="aboutVersion">—</strong>
+              </div>
+              <div class="detail-row">
+                <span>Server software</span><strong id="aboutSoftware">—</strong>
+              </div>
+              <div class="detail-row">
+                <span>Owner</span><strong>reyaansh72 (Reyaansh)</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-title">What is an SMP?</div>
+        <div class="md-card panel">
+          <h2 class="panel-title">Survival Multiplayer</h2>
+          <p class="panel-description">
+            SMP stands for Survival Multiplayer. Players share a
+            Minecraft world, gather resources, build structures and
+            explore together. Your adventure is what you make of it.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================= JOIN ================= -->
+      <section class="page" id="page-join">
+        <div class="page-heading">
+          <div class="eyebrow">Getting started</div>
+          <h1>How to join</h1>
+          <p>Connect to ReyaanshSMP using Minecraft Java Edition.</p>
+        </div>
+
+        <div class="md-card panel">
+          <h2 class="panel-title">Your server address</h2>
+          <p class="panel-description">Copy this address into Minecraft.</p>
+
+          <div class="server-address" style="padding:15px 0 0;margin:0">
+            <div>
+              <div class="address-value" id="joinAddress">Loading...</div>
+            </div>
+            <button class="md-btn md-btn-filled" onclick="copyIP()">
+              <span class="material-symbols-rounded">content_copy</span>
+              Copy IP
+            </button>
+          </div>
+        </div>
+
+        <div class="section-title">Connection instructions</div>
+        <div class="md-card panel">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div>
+              <h3>Open Minecraft Java Edition</h3>
+              <p>Start Minecraft Java Edition on your computer.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div>
+              <h3>Open Multiplayer</h3>
+              <p>Choose the Multiplayer option from the main menu.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div>
+              <h3>Add a server</h3>
+              <p>Choose Add Server and enter ReyaanshSMP as the server name.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">4</div>
+            <div>
+              <h3>Enter the server address</h3>
+              <p>Paste the address shown above into the Server Address field.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">5</div>
+            <div>
+              <h3>Join the server</h3>
+              <p>Save the entry, select ReyaanshSMP and click Join Server.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-title">Before joining</div>
+        <div class="grid grid-2">
+          <div class="md-card panel">
+            <h3 class="panel-title">Check availability</h3>
+            <p class="panel-description">
+              Check the live status page before connecting.
+            </p>
+            <button class="md-btn md-btn-tonal" style="margin-top:16px"
+              onclick="navigate('status')">
+              View server status
+            </button>
+          </div>
+
+          <div class="md-card panel">
+            <h3 class="panel-title">Read the rules</h3>
+            <p class="panel-description">
+              Read the server guidelines before playing.
+            </p>
+            <button class="md-btn md-btn-tonal" style="margin-top:16px"
+              onclick="navigate('rules')">
+              View rules
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= STATUS ================= -->
+      <section class="page" id="page-status">
+        <div class="page-heading">
+          <div class="eyebrow">Live monitoring</div>
+          <h1>Server status</h1>
+          <p>Live information retrieved from the Minecraft server status API.</p>
+        </div>
+
+        <div class="md-card status-banner">
+          <div class="status-banner-left">
+            <span class="status-large-dot" id="statusLargeDot"></span>
+            <div>
+              <div class="status-heading" id="statusTitle">Checking server...</div>
+              <div class="status-subheading" id="statusDescription">
+                Requesting server information
+              </div>
+            </div>
+          </div>
+          <button class="md-btn md-btn-tonal" id="refreshButton"
+            onclick="refreshServer()">
+            <span class="material-symbols-rounded">refresh</span>
+            Refresh
+          </button>
+        </div>
+
+        <div class="grid grid-4">
+          <div class="md-card stat-card">
+            <div class="stat-top">Players online
+              <span class="stat-icon material-symbols-rounded">group</span>
+            </div>
+            <div class="stat-number" id="statusPlayers">—</div>
+            <div class="stat-caption" id="statusPlayerMax">Maximum unknown</div>
+          </div>
+
+          <div class="md-card stat-card">
+            <div class="stat-top">Version
+              <span class="stat-icon material-symbols-rounded">deployed_code</span>
+            </div>
+            <div class="stat-number" id="statusVersion" style="font-size:21px">—</div>
+            <div class="stat-caption">Reported game version</div>
+          </div>
+
+          <div class="md-card stat-card">
+            <div class="stat-top">Protocol
+              <span class="stat-icon material-symbols-rounded">hub</span>
+            </div>
+            <div class="stat-number" id="statusProtocol">—</div>
+            <div class="stat-caption">Protocol number</div>
+          </div>
+
+          <div class="md-card stat-card">
+            <div class="stat-top">API response
+              <span class="stat-icon material-symbols-rounded">speed</span>
+            </div>
+            <div class="stat-number" id="statusLatency">—</div>
+            <div class="stat-caption">HTTP request duration</div>
+          </div>
+        </div>
+
+        <div class="section-title">Technical information</div>
+        <div class="grid grid-2">
+          <div class="md-card panel">
+            <h2 class="panel-title">Connection details</h2>
+            <div style="margin-top:15px">
+              <div class="detail-row">
+                <span>Configured address</span><strong id="detailAddress">—</strong>
+              </div>
+              <div class="detail-row">
+                <span>Resolved IP</span><strong id="detailResolvedIP">—</strong>
+              </div>
+              <div class="detail-row">
+                <span>Port</span><strong id="detailPort">—</strong>
+              </div>
+              <div class="detail-row">
+                <span>Hostname</span><strong id="detailHostname">—</strong>
+              </div>
+              <div class="detail-row">
+                <span>Software</span><strong id="detailSoftware">—</strong>
+              </div>
+              <div class="detail-row">
+                <span>Last checked</span><strong id="detailLastChecked">—</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="md-card panel">
+            <h2 class="panel-title">Server capabilities</h2>
+            <div style="margin-top:15px">
+              <div class="detail-row">
+                <span>Plugins reported</span><strong id="detailPlugins">—</strong>
+              </div>
+              <div class="detail-row">
+                <span>Mods reported</span><strong id="detailMods">—</strong>
+              </div>
+              <div class="detail-row">
+                <span>Player sample</span><strong id="detailPlayerSample">—</strong>
+              </div>
+              <div class="detail-row">
+                <span>API source</span><strong>mcsrvstat.us</strong>
+              </div>
+              <div class="detail-row">
+                <span>API endpoint</span><strong>v3</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-title">Message of the day</div>
+        <div class="md-card panel">
+          <div class="motd-box" id="serverMotd">Waiting for server response...</div>
+        </div>
+
+        <div class="section-title">Online player sample</div>
+        <div class="md-card panel">
+          <p class="panel-description">
+            Names are shown only when the status API provides a player sample.
+          </p>
+          <div class="player-list" id="playerList">
+            <span class="loading">Waiting for server response...</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= RULES ================= -->
+      <section class="page" id="page-rules">
+        <div class="page-heading">
+          <div class="eyebrow">Community guidelines</div>
+          <h1>Server rules</h1>
+          <p>Basic guidelines for keeping the server enjoyable for everyone.</p>
+        </div>
+
+        <div class="md-card panel">
+          <div class="rule-item">
+            <span class="material-symbols-rounded">handshake</span>
+            <div>
+              <h3>Respect other players</h3>
+              <p>Be respectful. Harassment, bullying and targeted abuse are not acceptable.</p>
+            </div>
+          </div>
+
+          <div class="rule-item">
+            <span class="material-symbols-rounded">security</span>
+            <div>
+              <h3>Play fairly</h3>
+              <p>Do not use unfair advantages or tools that disrupt normal gameplay.</p>
+            </div>
+          </div>
+
+          <div class="rule-item">
+            <span class="material-symbols-rounded">forum</span>
+            <div>
+              <h3>Keep chat appropriate</h3>
+              <p>Avoid spam, excessive disruption and inappropriate messages.</p>
+            </div>
+          </div>
+
+          <div class="rule-item">
+            <span class="material-symbols-rounded">landscape</span>
+            <div>
+              <h3>Respect other builds</h3>
+              <p>Do not damage or take other players' creations and belongings.</p>
+            </div>
+          </div>
+
+          <div class="rule-item">
+            <span class="material-symbols-rounded">admin_panel_settings</span>
+            <div>
+              <h3>Follow staff instructions</h3>
+              <p>Cooperate with server staff when they are handling an issue.</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="muted" style="font-size:12px;line-height:1.7;margin-top:15px">
+          These are general website guidelines. The server owner or staff may
+          provide additional rules in the server itself.
+        </p>
+      </section>
+
+      <!-- ================= FAQ ================= -->
+      <section class="page" id="page-faq">
+        <div class="page-heading">
+          <div class="eyebrow">Need help?</div>
+          <h1>Frequently asked questions</h1>
+          <p>Some useful answers about connecting to ReyaanshSMP.</p>
+        </div>
+
+        <div class="md-card panel">
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              What is the server address?
+              <span class="material-symbols-rounded">expand_more</span>
+            </button>
+            <div class="faq-answer">
+              The address is <strong id="faqAddress">Loading...</strong>.
+              You can copy it from the Home or How to Join page.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Which Minecraft edition is supported?
+              <span class="material-symbols-rounded">expand_more</span>
+            </button>
+            <div class="faq-answer">
+              This website is configured for Minecraft Java Edition.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              How can I check if the server is online?
+              <span class="material-symbols-rounded">expand_more</span>
+            </button>
+            <div class="faq-answer">
+              Open the Server Status page. It retrieves the latest available
+              status from the Minecraft server status API.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Where can I find the server version?
+              <span class="material-symbols-rounded">expand_more</span>
+            </button>
+            <div class="faq-answer">
+              The version is displayed on the Home and Server Status pages
+              when the API reports it.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Who owns ReyaanshSMP?
+              <span class="material-symbols-rounded">expand_more</span>
+            </button>
+            <div class="faq-answer">
+              The server owner is reyaansh72 (Reyaansh).
+              Visit the Server Owner page for the GitHub profile.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Why is server status unavailable?
+              <span class="material-symbols-rounded">expand_more</span>
+            </button>
+            <div class="faq-answer">
+              The server may not be responding, the API may be temporarily
+              unavailable, or the browser may be unable to reach the API.
+              Try refreshing the status page.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= COMMUNITY ================= -->
+      <section class="page" id="page-community">
+        <div class="page-heading">
+          <div class="eyebrow">Find us online</div>
+          <h1>Community</h1>
+          <p>Explore the project's GitHub organization and related profiles.</p>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="md-card panel">
+            <div class="owner-card">
+              <img src="https://github.com/ReyaanshSMP.png" alt="ReyaanshSMP">
+              <div>
+                <h2>ReyaanshSMP</h2>
+                <p>Official GitHub organization</p>
+                <a class="md-btn md-btn-tonal"
+                  href="https://github.com/ReyaanshSMP"
+                  target="_blank" rel="noopener">
+                  <span class="material-symbols-rounded">open_in_new</span>
+                  Visit organization
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="md-card panel">
+            <div class="owner-card">
+              <img src="https://github.com/reyaansh72.png" alt="Reyaansh">
+              <div>
+                <h2>reyaansh72</h2>
+                <p>Server Owner · Reyaansh</p>
+                <a class="md-btn md-btn-tonal"
+                  href="https://github.com/reyaansh72"
+                  target="_blank" rel="noopener">
+                  <span class="material-symbols-rounded">open_in_new</span>
+                  Visit profile
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-title">Project links</div>
+        <div class="md-card panel">
+          <a class="community-link" href="https://github.com/ReyaanshSMP"
+            target="_blank" rel="noopener">
+            <div class="community-icon">
+              <span class="material-symbols-rounded">code</span>
+            </div>
+            <div>
+              <h3>GitHub organization</h3>
+              <p>github.com/ReyaanshSMP</p>
+            </div>
+            <span class="material-symbols-rounded">open_in_new</span>
+          </a>
+
+          <a class="community-link" href="https://github.com/reyaansh72"
+            target="_blank" rel="noopener">
+            <div class="community-icon">
+              <span class="material-symbols-rounded">person</span>
+            </div>
+            <div>
+              <h3>Server owner profile</h3>
+              <p>github.com/reyaansh72</p>
+            </div>
+            <span class="material-symbols-rounded">open_in_new</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ================= OWNER ================= -->
+      <section class="page" id="page-owner">
+        <div class="page-heading">
+          <div class="eyebrow">Behind the server</div>
+          <h1>Server owner</h1>
+          <p>Meet the person behind ReyaanshSMP.</p>
+        </div>
+
+        <div class="md-card panel">
+          <div class="owner-card">
+            <img src="https://github.com/reyaansh72.png" alt="Reyaansh profile">
+            <div>
+              <div class="eyebrow" style="margin-bottom:7px">SERVER OWNER</div>
+              <h2>reyaansh72 (Reyaansh)</h2>
+              <p>Creator and owner of ReyaanshSMP.</p>
+              <div class="btn-row">
+                <a class="md-btn md-btn-filled"
+                  href="https://github.com/reyaansh72"
+                  target="_blank" rel="noopener">
+                  <span class="material-symbols-rounded">open_in_new</span>
+                  GitHub profile
+                </a>
+                <a class="md-btn md-btn-outlined"
+                  href="https://github.com/ReyaanshSMP"
+                  target="_blank" rel="noopener">
+                  <span class="material-symbols-rounded">groups</span>
+                  Organization
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-title">Server ownership</div>
+        <div class="grid grid-2">
+          <div class="md-card panel">
+            <div class="feature-icon">
+              <span class="material-symbols-rounded">dns</span>
+            </div>
+            <h3 class="panel-title">Server</h3>
+            <p class="panel-description">
+              ReyaanshSMP is the Minecraft server represented by this website.
+            </p>
+          </div>
+          <div class="md-card panel">
+            <div class="feature-icon">
+              <span class="material-symbols-rounded">code</span>
+            </div>
+            <h3 class="panel-title">Organization</h3>
+            <p class="panel-description">
+              The GitHub organization provides the project's online home.
+            </p>
+          </div>
+        </div>
+      </section>
+
     </div>
 
-    <!-- SNACKBAR -->
-    <div id="snackbar" class="snackbar">
-        <svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
-        <span id="snackbar-text">Copied to clipboard!</span>
-    </div>
-
-    <!-- FOOTER -->
-    <footer>
-        <h2 style="margin-bottom: 8px;">ReyaanshSMP</h2>
-        <p>&copy; <span id="year"></span> All rights reserved. Not affiliated with Mojang AB.</p>
+    <footer class="footer">
+      <div>
+        © <span id="currentYear"></span> ReyaanshSMP
+        · Owned by <a href="https://github.com/reyaansh72"
+          target="_blank" rel="noopener">reyaansh72 (Reyaansh)</a>
+      </div>
+      <div>
+        <a href="https://github.com/ReyaanshSMP"
+          target="_blank" rel="noopener">GitHub organization</a>
+        · Minecraft server website
+      </div>
     </footer>
 
-    <!-- =========================================
-         JAVASCRIPT LOGIC
-         ========================================= -->
-    <script>
-        // -----------------------------------------
-        // 1. IP CONFIGURATION VARIABLES
-        // -----------------------------------------
-        const SERVER_IP = "signaling-pls.tun.ply.gg";
-        const BEDROCK_PORT = "19132"; // Default Bedrock port
+  </main>
+</div>
 
-        // Initialize UI Text
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('display-java-ip').innerText = SERVER_IP;
-            document.getElementById('display-bedrock-ip').innerHTML = `IP: ${SERVER_IP}<br>Port: ${BEDROCK_PORT}`;
-            document.getElementById('year').innerText = new Date().getFullYear();
-        
+<div class="toast" id="toast">Copied!</div>
 
-            // Load saved settings
-            const savedMode = localStorage.getItem('mode') || 'dark';
-            const savedColor = localStorage.getItem('color') || 'purple';
-            
-            applyDarkMode(savedMode === 'dark');
-            setColor(savedColor);
-        });
+<script>
+  /* =========================================
+     SERVER CONFIGURATION
+     Change the IP here. The whole website uses it.
+     ========================================= */
 
-        // -----------------------------------------
-        // 2. COPY LOGIC
-        // -----------------------------------------
-        let snackTimeout;
-        function copyIP(type) {
-            let textToCopy = SERVER_IP;
-            let msg = `Copied Java IP: ${SERVER_IP}`;
-            
-            if (type === 'bedrock') {
-                textToCopy = `${SERVER_IP} Port: ${BEDROCK_PORT}`;
-                msg = `Copied Bedrock Info!`;
-            }
+  const SERVER_IP = "signaling-pls.tun.ply.gg";
+  const SERVER_PORT = 25565;
 
-            navigator.clipboard.writeText(textToCopy).then(() => {
-                showToast(msg);
-            }).catch(() => {
-                showToast("Failed to copy. Please select the text manually.");
-            });
-        }
+  const SERVER_API_URL =
+    `https://api.mcsrvstat.us/3/${encodeURIComponent(SERVER_IP)}:${SERVER_PORT}`;
 
-        function showToast(msg) {
-            const snackbar = document.getElementById('snackbar');
-            document.getElementById('snackbar-text').innerText = msg;
-            snackbar.classList.add('show');
-            clearTimeout(snackTimeout);
-            snackTimeout = setTimeout(() => snackbar.classList.remove('show'), 3000);
-        }
+  const SERVER_ICON_URL = "https://github.com/ReyaanshSMP.png";
 
-        // -----------------------------------------
-        // 3. DARK MODE LOGIC (The Header Button)
-        // -----------------------------------------
-        let isDark = true;
-        const iconMoon = '<path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4C12.92 3.04 12.46 3 12 3zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7c.32 0 .63.03.94.08-1.18 1.16-1.94 2.78-1.94 4.58 0 3.51 2.85 6.36 6.36 6.36 1.8 0 3.42-.76 4.58-1.94.05.31.08.62.08.94 0 3.86-3.14 7-7 7z"/>';
-        const iconSun = '<path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zM18.36 16.95a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 000-1.41l-1.06-1.06zM16.95 5.99a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>';
+  const OWNER_USERNAME = "reyaansh72";
+  const OWNER_DISPLAY_NAME = "Reyaansh";
 
-        function toggleDarkMode() {
-            applyDarkMode(!isDark);
-        }
+  const GITHUB_ORG_URL = "https://github.com/ReyaanshSMP";
 
-        function applyDarkMode(darkValue) {
-            isDark = darkValue;
-            localStorage.setItem('mode', isDark ? 'dark' : 'light');
-            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
-            
-            // Update the button UI
-            document.getElementById('mode-icon').innerHTML = isDark ? iconMoon : iconSun;
-            document.getElementById('mode-text').innerText = isDark ? 'Dark Mode' : 'Light Mode';
-            
-            updateThemeVariables();
-        }
+  /* =========================================
+     RANDOM MATERIAL YOU ACCENT
+     A new accent is selected every fresh load.
+     ========================================= */
 
-        // -----------------------------------------
-        // 4. MATERIAL THEME COLORS
-        // -----------------------------------------
-        const palettes = {
-            purple: {
-                light: { primary: '#6750a4', onPrimary: '#ffffff', primaryContainer: '#eaddff', onPrimaryContainer: '#21005d' },
-                dark:  { primary: '#d0bcff', onPrimary: '#381e72', primaryContainer: '#4f378b', onPrimaryContainer: '#eaddff' }
-            },
-            blue: {
-                light: { primary: '#0061a4', onPrimary: '#ffffff', primaryContainer: '#d1e4ff', onPrimaryContainer: '#001d36' },
-                dark:  { primary: '#9ecaff', onPrimary: '#003258', primaryContainer: '#00497d', onPrimaryContainer: '#d1e4ff' }
-            },
-            green: {
-                light: { primary: '#1a6c30', onPrimary: '#ffffff', primaryContainer: '#a6f5a9', onPrimaryContainer: '#002107' },
-                dark:  { primary: '#8cd88f', onPrimary: '#003912', primaryContainer: '#00531e', onPrimaryContainer: '#a6f5a9' }
-            },
-            red: {
-                light: { primary: '#b3261e', onPrimary: '#ffffff', primaryContainer: '#f9dedc', onPrimaryContainer: '#410e0b' },
-                dark:  { primary: '#f2b8b5', onPrimary: '#601410', primaryContainer: '#8c1d18', onPrimaryContainer: '#f9dedc' }
-            },
-            orange: {
-                light: { primary: '#e65100', onPrimary: '#ffffff', primaryContainer: '#ffcc80', onPrimaryContainer: '#331200' },
-                dark:  { primary: '#ffb74d', onPrimary: '#4d1a00', primaryContainer: '#802b00', onPrimaryContainer: '#ffcc80' }
-            }
-        };
+  const ACCENT_PALETTES = [
+    {
+      primary: "#b9c5ff",
+      container: "#29365c",
+      onContainer: "#e0e4ff"
+    },
+    {
+      primary: "#d0bcff",
+      container: "#49356f",
+      onContainer: "#eadbff"
+    },
+    {
+      primary: "#a8d8ff",
+      container: "#174568",
+      onContainer: "#d1e8ff"
+    },
+    {
+      primary: "#a8d5c0",
+      container: "#244b3b",
+      onContainer: "#c5f0dc"
+    },
+    {
+      primary: "#e9c18c",
+      container: "#57432b",
+      onContainer: "#ffddb0"
+    },
+    {
+      primary: "#f0b6c8",
+      container: "#623849",
+      onContainer: "#ffd9e4"
+    },
+    {
+      primary: "#c6c5a0",
+      container: "#45452e",
+      onContainer: "#e3e2bd"
+    }
+  ];
 
-        let currentColor = 'purple';
+  function applyRandomAccent() {
+    const palette =
+      ACCENT_PALETTES[Math.floor(Math.random() * ACCENT_PALETTES.length)];
 
-        function setColor(colorName, btnElement = null) {
-            currentColor = colorName;
-            localStorage.setItem('color', colorName);
-            
-            // Handle active ring on the color picker dock
-            document.querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('active'));
-            if (btnElement) {
-                btnElement.classList.add('active');
-            } else {
-                const colors = ['purple', 'blue', 'green', 'red', 'orange'];
-                const idx = colors.indexOf(colorName);
-                if (idx > -1) document.querySelectorAll('.color-btn')[idx].classList.add('active');
-            }
+    const root = document.documentElement;
 
-            updateThemeVariables();
-        }
+    root.style.setProperty("--accent", palette.primary);
+    root.style.setProperty("--accent-container", palette.container);
+    root.style.setProperty("--accent-text", "#17171d");
 
-        function updateThemeVariables() {
-            const root = document.documentElement;
-            const mode = isDark ? 'dark' : 'light';
-            const theme = palettes[currentColor][mode];
+    root.style.setProperty("--md-sys-color-primary", palette.primary);
+    root.style.setProperty("--md-sys-color-primary-container", palette.container);
+    root.style.setProperty("--md-sys-color-on-primary-container", palette.onContainer);
+  }
 
-            root.style.setProperty('--primary', theme.primary);
-            root.style.setProperty('--on-primary', theme.onPrimary);
-            root.style.setProperty('--primary-container', theme.primaryContainer);
-            root.style.setProperty('--on-primary-container', theme.onPrimaryContainer);
-        }
-    </script>
+  applyRandomAccent();
+
+  /* =========================================
+     PAGE NAVIGATION
+     ========================================= */
+
+  const PAGE_NAMES = {
+    home: "Home",
+    about: "About",
+    join: "How to Join",
+    status: "Server Status",
+    rules: "Rules",
+    faq: "FAQ",
+    community: "Community",
+    owner: "Server Owner"
+  };
+
+  function navigate(page) {
+    if (!PAGE_NAMES[page]) page = "home";
+
+    document.querySelectorAll(".page").forEach(section => {
+      section.classList.remove("active");
+    });
+
+    document.querySelectorAll(".nav-item").forEach(button => {
+      button.classList.toggle("active", button.dataset.page === page);
+    });
+
+    const target = document.getElementById(`page-${page}`);
+    if (target) target.classList.add("active");
+
+    document.getElementById("breadcrumbPage").textContent = PAGE_NAMES[page];
+
+    if (location.hash !== `#${page}`) {
+      history.pushState({ page }, "", `#${page}`);
+    }
+
+    closeSidebar();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  document.querySelectorAll(".nav-item").forEach(button => {
+    button.addEventListener("click", () => navigate(button.dataset.page));
+  });
+
+  function loadPageFromHash() {
+    const page = location.hash.replace("#", "") || "home";
+    const validPage = PAGE_NAMES[page] ? page : "home";
+
+    document.querySelectorAll(".page").forEach(section => {
+      section.classList.remove("active");
+    });
+
+    document.querySelectorAll(".nav-item").forEach(button => {
+      button.classList.toggle("active", button.dataset.page === validPage);
+    });
+
+    document.getElementById(`page-${validPage}`).classList.add("active");
+    document.getElementById("breadcrumbPage").textContent = PAGE_NAMES[validPage];
+  }
+
+  window.addEventListener("popstate", loadPageFromHash);
+  window.addEventListener("hashchange", loadPageFromHash);
+
+  /* =========================================
+     MOBILE SIDEBAR
+     ========================================= */
+
+  function toggleSidebar() {
+    document.getElementById("sidebar").classList.toggle("open");
+    document.getElementById("mobileOverlay").classList.toggle("show");
+  }
+
+  function closeSidebar() {
+    document.getElementById("sidebar").classList.remove("open");
+    document.getElementById("mobileOverlay").classList.remove("show");
+  }
+
+  /* =========================================
+     COPY SERVER IP
+     ========================================= */
+
+  async function copyIP() {
+    const address = `${SERVER_IP}:${SERVER_PORT}`;
+
+    try {
+      await navigator.clipboard.writeText(address);
+      showToast("Server address copied!");
+    } catch (error) {
+      const input = document.createElement("textarea");
+      input.value = address;
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand("copy");
+      input.remove();
+      showToast("Server address copied!");
+    }
+  }
+
+  let toastTimeout;
+
+  function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => {
+      toast.classList.remove("show");
+    }, 2300);
+  }
+
+  /* =========================================
+     FAQ ACCORDION
+     ========================================= */
+
+  function toggleFaq(button) {
+    button.parentElement.classList.toggle("open");
+  }
+
+  /* =========================================
+     SERVER STATUS API
+     ========================================= */
+
+  let serverData = null;
+  let lastApiDuration = null;
+  let isFetching = false;
+
+  function setText(id, value) {
+    const element = document.getElementById(id);
+    if (element) element.textContent = value;
+  }
+
+  function safeValue(value, fallback = "Unknown") {
+    if (value === undefined || value === null || value === "") {
+      return fallback;
+    }
+    return String(value);
+  }
+
+  function formatMotd(motd) {
+    if (!motd) return "No message of the day was provided.";
+
+    if (Array.isArray(motd)) {
+      return motd.join("\n");
+    }
+
+    if (typeof motd === "string") {
+      return motd;
+    }
+
+    return "No message of the day was provided.";
+  }
+
+  function setStatusAppearance(state, description) {
+    const online = state === "online";
+    const offline = state === "offline";
+
+    const dotClasses = ["heroDot", "sidebarDot", "statusLargeDot"];
+
+    document.getElementById("heroDot").className =
+      "status-dot" + (online ? " online" : offline ? " offline" : "");
+
+    document.getElementById("sidebarDot").className =
+      "status-dot" + (online ? " online" : offline ? " offline" : "");
+
+    document.getElementById("statusLargeDot").className =
+      "status-large-dot" + (online ? " online" : offline ? " offline" : "");
+
+    const label = online ? "Online" : offline ? "Offline" : "Unavailable";
+
+    setText("heroStatus", label);
+    setText("sidebarStatus", label);
+    setText("statusTitle", label);
+    setText("statusDescription", description);
+    setText("homeOnline", label);
+  }
+
+  function updatePlayerSample(players) {
+    const container = document.getElementById("playerList");
+    container.replaceChildren();
+
+    const names = players && Array.isArray(players.list)
+      ? players.list
+      : [];
+
+    if (names.length === 0) {
+      const empty = document.createElement("span");
+      empty.className = "loading";
+      empty.textContent = "No player sample provided by the API.";
+      container.appendChild(empty);
+      return;
+    }
+
+    names.forEach(player => {
+      const pill = document.createElement("span");
+      pill.className = "player-pill";
+      pill.textContent = typeof player === "string"
+        ? player
+        : safeValue(player.name, "Unknown player");
+      container.appendChild(pill);
+    });
+  }
+
+  function updateServerIcon(icon) {
+    const imageSources = document.querySelectorAll(
+      ".brand img, .hero-logo, .about-logo"
+    );
+
+    const source = icon && icon.startsWith("data:image/")
+      ? icon
+      : SERVER_ICON_URL;
+
+    imageSources.forEach(image => {
+      image.src = source;
+      image.onerror = () => {
+        image.src = SERVER_ICON_URL;
+      };
+    });
+  }
+
+  function renderServerData(data) {
+    serverData = data;
+
+    const online = data.online === true;
+    const players = data.players || {};
+    const playerCount = Number.isFinite(players.online) ? players.online : 0;
+    const maxPlayers = Number.isFinite(players.max) ? players.max : null;
+
+    const version = safeValue(data.version);
+    const software = safeValue(data.software);
+    const protocol = data.protocol === undefined
+      ? "Unknown"
+      : String(data.protocol);
+
+    const countText = maxPlayers === null
+      ? `${playerCount} online`
+      : `${playerCount} / ${maxPlayers}`;
+
+    setStatusAppearance(
+      online ? "online" : "offline",
+      online ? "The server responded successfully." : "The server API reports that it is offline."
+    );
+
+    setText("homePlayers", String(playerCount));
+    setText("homeMaxPlayers", maxPlayers === null
+      ? "Maximum player count unavailable"
+      : `${maxPlayers} maximum players`);
+
+    setText("homeVersion", version);
+    setText("homeSoftware", software);
+
+    setText("statusPlayers", String(playerCount));
+    setText("statusPlayerMax", maxPlayers === null
+      ? "Maximum unknown"
+      : `${maxPlayers} maximum`);
+
+    setText("statusVersion", version);
+    setText("statusProtocol", protocol);
+    setText("statusLatency", lastApiDuration === null
+      ? "—"
+      : `${lastApiDuration} ms`);
+
+    setText("sidebarPlayers", countText);
+
+    setText("detailAddress", `${SERVER_IP}:${SERVER_PORT}`);
+    setText("detailResolvedIP", safeValue(data.ip));
+    setText("detailPort", safeValue(data.port, String(SERVER_PORT)));
+    setText("detailHostname", safeValue(data.hostname));
+    setText("detailSoftware", software);
+    setText("detailPlugins", data.plugins && Array.isArray(data.plugins.names)
+      ? String(data.plugins.names.length)
+      : "Not reported");
+    setText("detailMods", data.mods && Array.isArray(data.mods.names)
+      ? String(data.mods.names.length)
+      : "Not reported");
+    setText("detailPlayerSample",
+      players.list && Array.isArray(players.list)
+        ? String(players.list.length)
+        : "Not provided");
+
+    const now = new Date().toLocaleTimeString();
+    setText("detailLastChecked", now);
+
+    setText("aboutVersion", version);
+    setText("aboutSoftware", software);
+
+    setText("serverMotd", formatMotd(data.motd && data.motd.clean));
+    updatePlayerSample(players);
+    updateServerIcon(data.icon);
+
+    document.getElementById("refreshButton").classList.remove("refreshing");
+  }
+
+  function renderApiError(message) {
+    setStatusAppearance("unknown", message);
+
+    setText("homePlayers", "—");
+    setText("homeMaxPlayers", "Status unavailable");
+    setText("homeVersion", "—");
+    setText("homeSoftware", "—");
+
+    setText("statusPlayers", "—");
+    setText("statusPlayerMax", "Unavailable");
+    setText("statusVersion", "—");
+    setText("statusProtocol", "—");
+    setText("statusLatency", "—");
+
+    setText("sidebarPlayers", "Status unavailable");
+    setText("serverMotd", message);
+    setText("detailLastChecked", new Date().toLocaleTimeString());
+
+    const container = document.getElementById("playerList");
+    container.replaceChildren();
+
+    const empty = document.createElement("span");
+    empty.className = "loading";
+    empty.textContent = "Player information unavailable.";
+    container.appendChild(empty);
+
+    document.getElementById("refreshButton").classList.remove("refreshing");
+  }
+
+  async function refreshServer() {
+    if (isFetching) return;
+
+    isFetching = true;
+
+    const button = document.getElementById("refreshButton");
+    button.classList.add("refreshing");
+
+    const started = performance.now();
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 12000);
+
+    try {
+      const response = await fetch(SERVER_API_URL, {
+        method: "GET",
+        cache: "no-store",
+        signal: controller.signal
+      });
+
+      if (!response.ok) {
+        throw new Error(`Status API returned HTTP ${response.status}`);
+      }
+
+      const data = await response.json();
+      lastApiDuration = Math.round(performance.now() - started);
+
+      if (typeof data.online !== "boolean") {
+        throw new Error("The API returned an unexpected response.");
+      }
+
+      renderServerData(data);
+    } catch (error) {
+      console.error("Server status error:", error);
+
+      renderApiError(
+        error.name === "AbortError"
+          ? "The status request timed out. Try again later."
+          : "Could not retrieve server status. The API may be unavailable."
+      );
+    } finally {
+      clearTimeout(timeout);
+      isFetching = false;
+      button.classList.remove("refreshing");
+    }
+  }
+
+  /* =========================================
+     INITIALIZE
+     ========================================= */
+
+  function initializeWebsite() {
+    const address = `${SERVER_IP}:${SERVER_PORT}`;
+
+    setText("homeAddress", address);
+    setText("joinAddress", address);
+    setText("aboutAddress", address);
+    setText("faqAddress", address);
+    setText("currentYear", String(new Date().getFullYear()));
+
+    loadPageFromHash();
+    updateServerIcon(null);
+    refreshServer();
+
+    // Refresh the status automatically every 30 seconds.
+    setInterval(refreshServer, 30000);
+  }
+
+  initializeWebsite();
+</script>
+
 </body>
 </html>
